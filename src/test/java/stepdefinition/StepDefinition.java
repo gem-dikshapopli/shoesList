@@ -16,8 +16,8 @@ public class StepDefinition {
         DemoImplementation.brands();
     }
     @And("Make a workbook and sheet of the excel then Store the name of the brand in the first row of the excel then Store the name of the shoes under there respective brands")
-    public static void workWithExcel() throws IOException {
-        DemoImplementation.workingWithExcel();
+    public static void workWithExcel() throws IOException, InterruptedException {
+        DemoImplementation.printShoesNameInExcel();
     }
     @Then("Read the excel and parse into JSON format")
     public static void parseJson() throws IOException {
