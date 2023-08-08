@@ -47,7 +47,7 @@ public class DemoImplementation {
         Thread.sleep(1000);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         int a;
-        for(int i=0;i<50;i++) {
+        for(int i=0;i<list.size;i++) {
             a = i + 1;
             String str = driver.findElement(By.xpath("(//span[@class='a-size-base-plus a-color-base a-text-normal']//preceding::div[@class='a-row a-size-base a-color-secondary']//descendant::span)[" + a + "]")).getText();
             String names = driver.findElement(By.xpath("(//span[@class='a-size-base-plus a-color-base a-text-normal'])[" + a + "]")).getText();
@@ -57,7 +57,7 @@ public class DemoImplementation {
                 pumaList.add(names);
             }
             else{
-                continue;
+                break;
             }
         }
         Thread.sleep(2000);
@@ -71,16 +71,19 @@ public class DemoImplementation {
         shoes.put("1",new Object[]{"Adidas","Puma"});
         int count=2;
         int m;
-        for(m=0;m<pumaList.size();m++){
+      Endlist:
+        for(m=0;m< adidasList.size();m++){
             shoes.put(""+count,new Object[]{(adidasList.get(m)),(pumaList.get(m))});
-            System.out.println(count+" : "+adidasList.get(m)+" : "+pumaList.get(m));
+            logger.info(count+" : "+adidasList.get(m)+" : "+pumaList.get(m));
             count++;
-        }
-        System.out.println("count = "+count+"m = "+m);
-        for(int n=m;n<adidasList.size();n++){
-            shoes.put(""+count,new Object[]{(adidasList.get(n))});
-            System.out.println(count+" : "+adidasList.get(n)+" : "+"-");
-            count++;
+            if(count== pumaList.size()-1){
+                for(int n=m;n<adidasList.size();n++){
+                    shoes.put(""+count,new Object[]{(adidasList.get(n))});
+                    logger.info(count+" : "+adidasList.get(n));
+                    count++;
+                }
+                break Endlist;
+            }
         }
         // writing on the Excel
         Set<String> keyId = shoes.keySet();
@@ -136,9 +139,9 @@ public class DemoImplementation {
         mainJson.add("adidas", String.valueOf(jsonArray1));
         mainJson.add("puma", String.valueOf(jsonArray2));
 
-        String str=mainJson.toString();
-        System.out.println("********************************* Parsing The JSON Object***************************");
-        System.out.println(str);
+        String jsonString=mainJson.toString();
+        logger.info("********************************* Parsing The JSON Object***************************");
+       logger.info(jsonString);
         driver.quit();
     }
 
