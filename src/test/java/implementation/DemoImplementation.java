@@ -97,7 +97,7 @@ public class DemoImplementation {
         }
 
         //formatter class so that every time new file is created in date and time format
-        FileOutputStream out = new FileOutputStream(new File("C:/Users/Diksha.Popli/Desktop/shoesExcel.xlsx"));
+        FileOutputStream out = new FileOutputStream(new File("C:/Users/Diksha.Popli/Desktop/shoesExcel-"+formatter.format(date)+".xlsx"));
         workbook.write(out);
         out.close();
 
@@ -105,7 +105,7 @@ public class DemoImplementation {
 
 
     public static void readExcel() throws IOException {
-        FileInputStream file = new FileInputStream("C:/Users/Diksha.Popli/Desktop/shoesExcel.xlsx");
+        FileInputStream file = new FileInputStream("C:/Users/Diksha.Popli/Desktop/shoesExcel-"+formatter.format(date)+".xlsx");
         XSSFWorkbook workbook = new XSSFWorkbook(file);
         XSSFSheet sheet = workbook.getSheet("List of Shoes");
 
